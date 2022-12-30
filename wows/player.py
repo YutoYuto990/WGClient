@@ -6,10 +6,12 @@ import matplotlib.pyplot as plt
 
 class Player:
   def __init__(self,application_id,name,locale=None):
-    locations=["asia","eu","ne"]
+    locations=["eu","ne","asia"]
     self.usingships=None
     self.draw=None
     self.application_id=application_id
+    self.name=name
+    res=None
     if locale:
       res=self._get_player_id(name,locale)
       self.account_id=res["account_id"]
@@ -27,11 +29,14 @@ class Player:
         self.locale=i
         self.name=res["nickname"]
         self.account_id=res["account_id"]
+      else:
+        raise PlayerNotFound("Player Not Found")
     self.value=self._get_player()
   
   def _get_player_id(self,name,locale) -> dict:
     url=f"https://api.worldofwarships.{locale}/wows/account/list/?application_id={self.application_id}&search={name}"
-    req=requests.get(url).content
+    resp=requests.get(url)
+    req=resp.content
     ret=json.loads(req)
     if ret["status"]=="ok":
       return ret["data"][0]
@@ -63,7 +68,7 @@ class Player:
         nations[sh["nation"]]=ship["battles"]
         self.draw={"type":types,"nation":nations}
     return {"type":types,"nation":nations}
-  def save_fig(self,path):
+  def save_data(self,path):
     if not self.draw:
       self.get_rate()
     types=self.draw["type"]
@@ -80,13 +85,13 @@ class Player:
         count+=types[i][k]
       x.append(count)
     percent=["{:.1f}".format(i*100/sum(x)) for i in x]
-    ax1.pie(x, startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=1.2)
-    ax1.legend([f"{i}:{j}%" for i,j in zip(labels,percent)],loc="lower left")
+    ax1.pie(x, startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=0.7)
+    ax1.legend([f"{i}:{j}%" for i,j in zip(labels,percent)],loc="lower left",frameon=False,fontsize=5)
     for i in nations:
       n.append(nations[i])
     per=["{:.1f}".format(i*100/sum(n)) for i in n]
     label=list(nations.keys())
-    ax2.pie(n,startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=1.2)
-    ax2.legend([f"" for i,j in zip()],loc="lower right")
+    ax2.pie(n,startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=0.7)
+    ax2.legend([f"{i}:{j}%" for i,j in zip(label,per)],loc="lower left",frameon=False,fontsize=5)
     plt.savefig(path)
     
