@@ -1,22 +1,38 @@
 import requests
 import os
 import json
-from dictionary import Dict
-api=os.getenv("wows_api")
-access_token=os.getenv("access_token")
-class NoPlayerFound(Exception):
-  pass
-class Wows:
-  def __init__(self,conv=dict):
-    self.conv=conv
+from .utility.dictionary import Dict
+from .player import Player
+from .ship import Ship
+
+
+class App:
+  def __init__(self,application_id,convert=False):
+    self.conv=Dict if convert else dict
+    self.application_id=application_id
   def conv2url(self,about,**params):
     param="".join([f"&{i}={params[i]}" for i in params])
     if about.count("/")==1:
-      return f"https://api.worldofwarships.asia/wows/{about}/?application_id={api}{param}"
-  def get_json(self,about,**params) -> dict:
+      return f"https://api.worldofwarships.asia/wows/{about}/?application_id={self.application_id}{param}"
+  
+  def _get_json(self,about,**params) -> dict:
     data=json.loads(requests.get(self.conv2url(about,**params)).content)
     return data
-  def _get_player_id(self,locale,name) -> dict:
+
+  def get_player(self,name,locale=None):
+    player=Player(self.application_id,name,locale)
+    return player
+
+  def get_ship(self,name_or_id):
+    ship=Ship(self.application_id,name_or_id)
+    return ship
+
+
+
+
+    
+  
+"""  def _get_player_id(self,locale,name) -> dict:
     url=f"https://api.worldofwarships.{locale}/wows/account/list/?application_id={api}&search={name}"
     req=requests.get(url).content
     ret=json.loads(req)
@@ -24,15 +40,23 @@ class Wows:
       return ret["data"]
     else:
       raise NoPlayerFound("Player Not Found")
+  
   def get_player(self,locale,name):
     
       pid=self._get_player_id(locale,name)[0]["account_id"]
       return self.conv(json.loads(requests.get(f"https://api.worldofwarships.{locale}/wows/account/info/?application_id={api}&account_id={pid}&extra=private.port&access_token={access_token}").content)["data"][str(pid)])
     #except:
      # return NoPlayerFound("player not found")
+
+  def _get_player_shiprate(self,locale,name):
+    pass
+  
   def get_player_ships(self,locale,name):
     pid=self._get_player_id(locale,name)[0]["account_id"]
-    return json.loads(requests.get(f"https://api.worldofwarships.asia/wows/ships/stats/?application_id={api}&account_id={pid}").content)["data"][str(pid)]
+    resp=json.loads(requests.get(f"https://api.worldofwarships.asia/wows/ships/stats/?application_id={api}&account_id={pid}").content)["data"][str(pid)]
+    resp[""]
+    return 
+  
   def _get_ship_id(self,name):
     for i in range(1,100):
       ships=self.get_json("encyclopedia/ships",page_no=i,language="ja")
@@ -42,6 +66,7 @@ class Wows:
             return i
       except Exception as e:
         raise e
+  
   def get_ship_data(self,name):
     try:
       sid=self._get_ship_id(name) if isinstance(name,str) else name
@@ -51,6 +76,7 @@ class Wows:
       return self.conv(data["data"][str(sid)])
     except Exception as e:
       raise e
+  
   def get_arena(self,name=None):
     data=self.get_json("encyclopedia/battlearenas",language="ja")
     if not name:
@@ -58,4 +84,4 @@ class Wows:
     else:
       for i in data["data"]:
         if data["data"][i]["name"]==name:
-          return self.conv(data["data"][i])
+          return self.conv(data["data"][i])"""
