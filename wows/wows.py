@@ -1,7 +1,7 @@
 import requests
 import os
 import json
-from .utility.dictionary import Dict
+from .utility.convdict import Dict
 from .player import Player
 from .ship import Ship
 from .arena import Arena
