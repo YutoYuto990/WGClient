@@ -68,7 +68,7 @@ class Player:
         nations[sh["nation"]]=ship["battles"]
         self.draw={"type":types,"nation":nations}
     return {"type":types,"nation":nations}
-  def save_data(self,path):
+  def generate_figure(self,path):
     if not self.draw:
       self.get_rate()
     types=self.draw["type"]
@@ -86,12 +86,12 @@ class Player:
       x.append(count)
     percent=["{:.1f}".format(i*100/sum(x)) for i in x]
     ax1.pie(x, startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=0.7)
-    ax1.legend([f"{i}:{j}%" for i,j in zip(labels,percent)],loc="lower left",frameon=False,fontsize=5)
+    ax1.legend([f"{i}:{j}%" for i,j in zip(labels,percent)],loc="lower left",frameon=False,fontsize=7)
     for i in nations:
       n.append(nations[i])
     per=["{:.1f}".format(i*100/sum(n)) for i in n]
     label=list(nations.keys())
     ax2.pie(n,startangle=90, counterclock=False,  autopct='%.1f%%', pctdistance=0.7)
-    ax2.legend([f"{i}:{j}%" for i,j in zip(label,per)],loc="lower left",frameon=False,fontsize=5)
+    ax2.legend([f"{i}:{j}%" for i,j in zip(label,per)],loc="lower left",frameon=False,fontsize=7)
     plt.savefig(path)
     

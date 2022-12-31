@@ -2,7 +2,8 @@ from .exception import *
 from .utility.utils import get_json
 
 class Ship:
-  def __init__(self,application_id,name_or_id):
+  def __init__(self,application_id,lang,name_or_id):
+    self.lang=lang
     self.application_id=application_id
     if isinstance(name_or_id,int):
       self.id=name_or_id
@@ -14,7 +15,7 @@ class Ship:
   
   def _get_ship_id(self,name):
     for i in range(1,100):
-      ships=get_json(self.application_id,"encyclopedia/ships",page_no=i,language="ja")
+      ships=get_json(self.application_id,"encyclopedia/ships",page_no=i,language=self.lang)
       for sh in ships["data"]:
         if ships["data"][sh]["name"]==name:
           return sh
@@ -23,8 +24,8 @@ class Ship:
   
   def _get_ship_data(self):
       sid=self.id
-      details=get_json(self.application_id,"encyclopedia/ships",ship_id=sid,language="ja")["data"][str(sid)]
-      data=get_json(self.application_id,"encyclopedia/shipprofile",ship_id=sid,language="ja")
+      details=get_json(self.application_id,"encyclopedia/ships",ship_id=sid,language=self.lang)["data"][str(sid)]
+      data=get_json(self.application_id,"encyclopedia/shipprofile",ship_id=sid,language=self.lang)
       data["data"][str(sid)]["details"]=details
       return data["data"][str(sid)]
   

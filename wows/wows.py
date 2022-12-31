@@ -4,12 +4,32 @@ import json
 from .utility.dictionary import Dict
 from .player import Player
 from .ship import Ship
+from .arena import Arena
 
 
 class App:
-  def __init__(self,application_id,convert=False):
+  def __init__(self,application_id,lang="ja",convert=False):
     self.conv=Dict if convert else dict
+    self.lang=lang
     self.application_id=application_id
+
+  def get_player(self,name,locale=None):
+    player=Player(self.application_id,name,locale)
+    return player
+
+  def get_ship(self,name_or_id):
+    ship=Ship(self.application_id,self.lang,name_or_id)
+    return ship
+
+  def get_arena(self,name=None):
+    return Arena(self.application_id,self.lang,name)
+
+
+
+
+    
+  
+"""
   def conv2url(self,about,**params):
     param="".join([f"&{i}={params[i]}" for i in params])
     if about.count("/")==1:
@@ -18,21 +38,7 @@ class App:
   def _get_json(self,about,**params) -> dict:
     data=json.loads(requests.get(self.conv2url(about,**params)).content)
     return data
-
-  def get_player(self,name,locale=None):
-    player=Player(self.application_id,name,locale)
-    return player
-
-  def get_ship(self,name_or_id):
-    ship=Ship(self.application_id,name_or_id)
-    return ship
-
-
-
-
-    
-  
-"""  def _get_player_id(self,locale,name) -> dict:
+def _get_player_id(self,locale,name) -> dict:
     url=f"https://api.worldofwarships.{locale}/wows/account/list/?application_id={api}&search={name}"
     req=requests.get(url).content
     ret=json.loads(req)
