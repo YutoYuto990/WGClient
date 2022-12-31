@@ -5,8 +5,9 @@ from .ship import Ship
 import matplotlib.pyplot as plt
 
 class Player:
-  def __init__(self,application_id,name,locale=None):
+  def __init__(self,application_id,conv,name,locale=None):
     locations=["eu","ne","asia"]
+    self.conv=conv
     self.usingships=None
     self.draw=None
     self.application_id=application_id
@@ -31,7 +32,7 @@ class Player:
         self.account_id=res["account_id"]
       else:
         raise PlayerNotFound("Player Not Found")
-    self.value=self._get_player()
+    self.value=self.conv(self._get_player())
   
   def _get_player_id(self,name,locale) -> dict:
     url=f"https://api.worldofwarships.{locale}/wows/account/list/?application_id={self.application_id}&search={name}"

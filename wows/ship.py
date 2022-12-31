@@ -2,7 +2,8 @@ from .exception import *
 from .utility.utils import get_json
 
 class Ship:
-  def __init__(self,application_id,lang,name_or_id):
+  def __init__(self,application_id,conv,lang,name_or_id):
+    self.conv=conv
     self.lang=lang
     self.application_id=application_id
     if isinstance(name_or_id,int):
@@ -11,7 +12,7 @@ class Ship:
       self.id=int(name_or_id)
     else:
       self.id=self._get_ship_id(name_or_id)
-    self.value=self._get_ship_data()
+    self.value=self.conv(self._get_ship_data())
   
   def _get_ship_id(self,name):
     for i in range(1,100):

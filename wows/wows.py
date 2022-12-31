@@ -14,15 +14,15 @@ class App:
     self.application_id=application_id
 
   def get_player(self,name,locale=None):
-    player=Player(self.application_id,name,locale)
+    player=Player(self.application_id,self.conv,name,locale)
     return player
 
   def get_ship(self,name_or_id):
-    ship=Ship(self.application_id,self.lang,name_or_id)
+    ship=Ship(self.application_id,self.conv,self.lang,name_or_id)
     return ship
 
   def get_arena(self,name=None):
-    return Arena(self.application_id,self.lang,name)
+    return Arena(self.application_id,self.conv,self.lang,name)
 
 
 
