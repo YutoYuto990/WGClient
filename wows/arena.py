@@ -1,7 +1,11 @@
 from .exception import *
 from .utility.utils import get_json
 class Arena:
-  def __init__(self,application_id,conv,lang,name=None):
+  def __init__(self,
+               application_id,
+               conv,
+               lang,
+               name=None):
     self.application_id=application_id
     self.conv=conv
     self.lang=lang

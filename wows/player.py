@@ -5,7 +5,11 @@ from .ship import Ship
 import matplotlib.pyplot as plt
 
 class Player:
-  def __init__(self,application_id,conv,name,locale=None):
+  def __init__(self,
+               application_id,
+               conv,
+               name,
+               locale=None):
     locations=["eu","ne","asia"]
     self.conv=conv
     self.usingships=None

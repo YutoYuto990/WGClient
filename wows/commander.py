@@ -2,7 +2,11 @@ from .exception import *
 from .utility.utils import get_json
 
 class Commander:
-  def __init__(self,application_id,conv,lang,name=None):
+  def __init__(self,
+               application_id,
+               conv,
+               lang,
+               name=None):
     self.application_id=application_id
     self.lang=lang
     self.value=self._get_commander_info(name)

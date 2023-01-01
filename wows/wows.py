@@ -27,10 +27,12 @@ class App:
     return ship
 
   def get_arena(self,name=None):
-    return Arena(self.application_id,self.conv,self.lang,name)
+    arena=Arena(self.application_id,self.conv,self.lang,name)
+    return arena
 
   def get_commander(self,name_or_id=None):
-    return Commander(self.application_id,self.conv,self.lang,name_or_id)
+    commander=Commander(self.application_id,self.conv,self.lang,name_or_id)
+    return commander
 
 
 

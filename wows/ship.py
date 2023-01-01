@@ -2,7 +2,11 @@ from .exception import *
 from .utility.utils import get_json
 
 class Ship:
-  def __init__(self,application_id,conv,lang,name_or_id):
+  def __init__(self,
+               application_id,
+               conv,
+               lang,
+               name_or_id):
     self.conv=conv
     self.lang=lang
     self.application_id=application_id
@@ -22,7 +26,6 @@ class Ship:
           return sh
     raise ShipNotFound("ship not found")
 
-  
   def _get_ship_data(self):
       sid=self.id
       details=get_json(self.application_id,"encyclopedia/ships",ship_id=sid,language=self.lang)["data"][str(sid)]
