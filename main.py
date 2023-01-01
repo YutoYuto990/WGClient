@@ -5,8 +5,8 @@ import os
 
 api=os.getenv("wows_api")
 
-app=App(api,"ja",True)
-print(app.get_ship("Sinop").value.details.name)
+app=App(api,"ja")
+print(app.get_commander(3854739152).value)
 
 
 

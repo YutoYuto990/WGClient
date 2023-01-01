@@ -5,6 +5,7 @@ from .utility.convdict import Dict
 from .player import Player
 from .ship import Ship
 from .arena import Arena
+from .commander import Commander
 from .exception import *
 
 
@@ -27,6 +28,9 @@ class App:
 
   def get_arena(self,name=None):
     return Arena(self.application_id,self.conv,self.lang,name)
+
+  def get_commander(self,name_or_id=None):
+    return Commander(self.application_id,self.conv,self.lang,name_or_id)
 
 
 
