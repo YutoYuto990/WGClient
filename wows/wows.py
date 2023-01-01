@@ -5,13 +5,17 @@ from .utility.convdict import Dict
 from .player import Player
 from .ship import Ship
 from .arena import Arena
+from .exception import *
 
 
 class App:
   def __init__(self,application_id,lang="ja",convert=False):
     self.conv=Dict if convert else dict
     self.lang=lang
-    self.application_id=application_id
+    if application_id:
+      self.application_id=application_id
+    else:
+      raise InvalidApplicationId("Invalid application id provided.")
 
   def get_player(self,name,locale=None):
     player=Player(self.application_id,self.conv,name,locale)
