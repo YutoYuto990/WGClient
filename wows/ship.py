@@ -12,11 +12,10 @@ class Ship:
     self.application_id=application_id
     if isinstance(name_or_id,int):
       self.id=name_or_id
-    elif name_or_id.isdigit():
-      self.id=int(name_or_id)
     else:
       self.id=self._get_ship_id(name_or_id)
     self.value=self.conv(self._get_ship_data())
+    self.origin=self._get_ship_data()
   
   def _get_ship_id(self,name):
     for i in range(1,100):

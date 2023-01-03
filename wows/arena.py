@@ -10,6 +10,7 @@ class Arena:
     self.conv=conv
     self.lang=lang
     self.value=self.conv(self._get_arena(name))
+    self.origin=self._get_arena(name)
     
   def _get_arena(self,name=None):
     data=get_json(self.application_id,"encyclopedia/battlearenas",language=self.lang)

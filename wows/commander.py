@@ -7,9 +7,11 @@ class Commander:
                conv,
                lang,
                name=None):
+    self.conv=conv
     self.application_id=application_id
     self.lang=lang
-    self.value=self._get_commander_info(name)
+    self.value=self.conv(self._get_commander_info(name))
+    self.origin=self._get_commander_info(name)
     
   def _get_commander_id(self,name):
     res=get_json(self.application_id,"encyclopedia/crews",language=self.lang)["data"]
@@ -26,7 +28,7 @@ class Commander:
     else:
       raise CommanderNotFound("commander not found.")
   
-  def _get_commander_info(self,name_or_id):
+  def _get_commander_info(self,name_or_id=None):
     if name_or_id:
       if isinstance(name_or_id,int):
         self.commander_id=name_or_id

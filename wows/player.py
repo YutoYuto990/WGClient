@@ -37,6 +37,7 @@ class Player:
       else:
         raise PlayerNotFound("Player Not Found")
     self.value=self.conv(self._get_player())
+    self.origin=self._get_player()
   
   def _get_player_id(self,name,locale) -> dict:
     url=f"https://api.worldofwarships.{locale}/wows/account/list/?application_id={self.application_id}&search={name}"
