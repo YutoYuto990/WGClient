@@ -1,5 +1,5 @@
 from .exception import *
-from .utility.utils import get_json
+from ..util.utils import get_json
 
 class Ship:
   def __init__(self,
@@ -26,9 +26,12 @@ class Ship:
     raise ShipNotFound("ship not found")
 
   def _get_ship_data(self):
-      sid=self.id
-      details=get_json(self.application_id,"encyclopedia/ships",ship_id=sid,language=self.lang)["data"][str(sid)]
-      data=get_json(self.application_id,"encyclopedia/shipprofile",ship_id=sid,language=self.lang)
-      data["data"][str(sid)]["details"]=details
-      return data["data"][str(sid)]
+    sid=self.id
+    details=get_json(self.application_id,"encyclopedia/ships",ship_id=sid,language=self.lang)["data"][str(sid)]
+    data=get_json(self.application_id,"encyclopedia/shipprofile",ship_id=sid,language=self.lang)
+    data["data"][str(sid)]["details"]=details
+    return data["data"][str(sid)]
+
+  def __str__(self):
+    return str(self.origin)
   

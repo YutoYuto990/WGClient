@@ -7,8 +7,17 @@ class ShipNotFound(Exception):
 class ArenaNotFound(Exception):
   pass
 
-class InvalidApplicationId(Exception):
+class CommanderNotFound(Exception):
   pass
 
-class CommanderNotFound(Exception):
+class ModuleNotFound(Exception):
+  pass
+
+class ClanNotFound(Exception):
+  pass
+
+class CollectionNotFound(Exception):
+  pass
+
+class SeasonNotFound(Exception):
   pass

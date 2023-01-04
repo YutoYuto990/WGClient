@@ -1,7 +1,7 @@
 import requests
 import os
 import json
-from .utility.convdict import Dict
+from ..util.convdict import Dict
 from .player import Player
 from .ship import Ship
 from .arena import Arena
@@ -13,13 +13,9 @@ class WowsApp:
   def __init__(self,application_id,lang="ja",convert=False):
     self.conv=Dict if convert else dict
     self.lang=lang
-    if application_id:
-      self.application_id=application_id
-    else:
-      raise InvalidApplicationId("Invalid application id provided.")
-
+    self.application_id=application_id
   def get_player(self,name,locale=None):
-    player=Player(self.application_id,self.conv,name,locale)
+    player=Player(self.application_id,self.conv,self.lang,name,locale)
     return player
 
   def get_ship(self,name_or_id):

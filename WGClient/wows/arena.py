@@ -1,5 +1,6 @@
 from .exception import *
-from .utility.utils import get_json
+from ..util.utils import get_json
+
 class Arena:
   def __init__(self,
                application_id,
@@ -28,3 +29,6 @@ class Arena:
         return res
       else:
         raise ArenaNotFound("arena not found")
+
+  def __str__(self):
+    return str(self.origin)

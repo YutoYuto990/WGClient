@@ -1,5 +1,5 @@
 from .exception import *
-from .utility.utils import get_json
+from ..util.utils import get_json
 
 class Commander:
   def __init__(self,
@@ -39,3 +39,6 @@ class Commander:
       res=get_json(self.application_id,"encyclopedia/crews",language=self.lang)
     res["data"][str(self.commander_id)]["id"]=self.commander_id
     return res["data"][str(self.commander_id)]
+
+  def __str__(self):
+    return str(self.origin)

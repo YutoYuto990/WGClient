@@ -1,12 +1,11 @@
-from wows import *
-import json
-import requests
+from WGClient import Client
 import os
 
 api=os.getenv("wows_api")
 
-app=App(api,"ja")
-print(app.get_commander(3854739152).value)
+client=Client(api,"ja")
+user=client.wows.get_arena("エルメス")
+print(user)
 
 
 
