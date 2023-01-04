@@ -2,9 +2,10 @@ class Dict:
   def __init__(self,dictionary):
     if isinstance(dictionary,dict):
       for i in dictionary:
+        key="num"+i if i.isdigit() else i
         if isinstance(dictionary[i],dict):
-          setattr(self,i,Dict(dictionary[i]))
+          setattr(self,key,Dict(dictionary[i]))
         else:
-          setattr(self,i,dictionary[i])
+          setattr(self,key,dictionary[i])
     else:
       return
