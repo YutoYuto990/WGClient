@@ -38,9 +38,4 @@ same
 
 same
 ### Player
-#### generate_figure
-:return: None
-
-`path`:str: save path
-
-generate graph of player’s nations and ship types.It may took few seconds to generate.
+#### get_ships
