@@ -9,7 +9,7 @@ from .commander import Commander
 from .exception import *
 
 
-class App:
+class WowsApp:
   def __init__(self,application_id,lang="ja",convert=False):
     self.conv=Dict if convert else dict
     self.lang=lang

@@ -2,11 +2,12 @@
 ## under construction
 ## Usage
 ```py
-import wows
-app=wows.App(application_id,"en")
-app.get_player("")
+import WGClient
+client=WGClient.Client(application_id,"en")
+client.wows.get_player
+. . .
 ```
-### App
+### Client
 `application_id`:str: literal
 
 `lang`:str: your language (country code)
@@ -23,6 +24,7 @@ get_ship("yamato").value.details.some
 ```
 Default is `False`.
 
+### WowsApp
 #### get_user
 :return: Player object
 
@@ -42,4 +44,3 @@ same
 `path`:str: save path
 
 generate graph of player’s nations and ship types.It may took few seconds to generate.
-
