@@ -53,5 +53,9 @@ class Player:
       pid=self._get_player_id(self.name,self.locale)["account_id"]
       return json.loads(requests.get(f"https://api.worldofwarships.{self.locale}/wows/account/info/?application_id={self.application_id}&account_id={pid}").content)["data"][str(pid)]
 
+  def using_ships(self):
+    resp=json.loads(requests.get(f"https://api.worldofwarships.{self.locale}/wows/ships/stats/?application_id={self.application_id}&account_id={self.account_id}").content)["data"][str(self.account_id)]
+    return resp
+
   def __str__(self):
     return str(self.origin)
