@@ -1,4 +1,4 @@
-# wows_client
+# WGClient
 ## under construction
 ## Usage
 ```py
