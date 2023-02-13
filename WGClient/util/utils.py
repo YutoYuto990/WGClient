@@ -1,7 +1,7 @@
 import requests
 import json
 
-def conv2url(appid,about,game="https://api.worldofwarships.asia/wows/",**params):
+def conv2url(appid,about,game="https://api.worldofwarships.asia/wows/",**params) -> str:
     param="".join([f"&{i}={params[i]}" for i in params])
     return f"{game}{about}/?application_id={appid}{param}"
   
